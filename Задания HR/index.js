@@ -5,14 +5,21 @@
 // На какие сутки черепашка залезет на столб? Требуется написать код на JS для решения задачи и дать ответ
 //                                     ^тут уже бедняга на столб ползет :-(
 
-//допустим, что задача не на внимательность, и черепашка действительно ползет НА ХОЛМ, а не НА СТОЛБ 
+// допустим, что задача не на внимательность, и черепашка действительно ползет НА ХОЛМ, а не НА СТОЛБ 
+// на входе присваиваем значение полного расстояния оставшемуся
+// проверяем, доползет ли черепашка за одни сутки 
+// если нет, то переопределяем оставшееся расстояние на начало следующего дня
+// и запихиваем бедную малютку в рекурсию, пока не доползет 
 
-//для полного соответствия условию "на какие сутки" - округлим результат в большую сторону
-function poorTurtle(fullDistance, perDayDistance, nightNegativeDistance){
-  return  Math.ceil(fullDistance / (perDayDistance - nightNegativeDistance))
+function poorTurtle(fullDistance, perDayDistance, nightNegativeDistance, daysCount = 1){
+  let distanceLeft = fullDistance
+  if (distanceLeft - perDayDistance <= 0) return daysCount
+  distanceLeft = distanceLeft - perDayDistance + nightNegativeDistance
+  daysCount += 1
+  return poorTurtle(distanceLeft, perDayDistance, nightNegativeDistance, daysCount)
 }
 
-console.log('Задача 1. Ответ:', poorTurtle(100, 50, 30))  //5 дней бедняга будет ползти 
+console.log('Задача 1. Ответ: на', poorTurtle(100, 50, 30), "день")  //4 дней бедняга будет ползти 
 
 
 //Вопрос 2:
