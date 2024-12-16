@@ -6,20 +6,19 @@
 //                                     ^тут уже бедняга на столб ползет :-(
 
 // допустим, что задача не на внимательность, и черепашка действительно ползет НА ХОЛМ, а не НА СТОЛБ 
-// на входе присваиваем значение полного расстояния оставшемуся
-// проверяем, доползет ли черепашка за одни сутки 
-// если нет, то переопределяем оставшееся расстояние на начало следующего дня
+
+// на входе проверяем, доползет ли черепашка за одни сутки 
+// если нет, то определяем оставшееся расстояние на начало следующего дня
 // и запихиваем бедную малютку в рекурсию, пока не доползет 
 
 function poorTurtle(fullDistance, perDayDistance, nightNegativeDistance, daysCount = 1){
-  let distanceLeft = fullDistance
-  if (distanceLeft - perDayDistance <= 0) return daysCount
-  distanceLeft = distanceLeft - perDayDistance + nightNegativeDistance
+  if (fullDistance - perDayDistance <= 0) return daysCount
+  let distanceLeft = fullDistance - perDayDistance + nightNegativeDistance
   daysCount += 1
   return poorTurtle(distanceLeft, perDayDistance, nightNegativeDistance, daysCount)
 }
 
-console.log('Задача 1. Ответ: на', poorTurtle(100, 50, 30), "день")  //4 дней бедняга будет ползти 
+console.log('Задача 1. Ответ: на', poorTurtle(100, 50, 30), "день")  //4 дня бедняга будет ползти 
 
 
 //Вопрос 2:
